@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaStarAndCrescent, FaSun } from 'react-icons/fa';
 
 const Header = () => {
+  const [toggle, setToggle] = useState(false)
+  const handleThemeToggle = () =>{
+        setToggle(!toggle);
+  }
+console.log(toggle);
+  // console.log(props);
   return (
     <div className='dark:bg-black dark:text-white'>
       <div className="navbar w-[92%] mx-auto">
@@ -35,13 +41,17 @@ const Header = () => {
         </div>
         <div className="navbar-end">
 
-          <button>
+          {/* <button>
             <FaStarAndCrescent></FaStarAndCrescent>
           </button>
 
           <button>
             <FaSun></FaSun>
-          </button>
+          </button> */}
+
+          <button onClick={()=>handleThemeToggle(true)}>{
+            toggle? <FaStarAndCrescent></FaStarAndCrescent> : <FaSun></FaSun>
+            }</button>
 
           <label tabIndex={0} className="btn btn-ghost btn-circle avatar ml-2">
             <div className="w-10 rounded-full">

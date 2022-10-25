@@ -1,8 +1,13 @@
 import React from 'react';
 import { Typewriter } from 'react-simple-typewriter';
 import { FaArrowCircleRight } from 'react-icons/fa';
+import { useLoaderData } from 'react-router-dom';
+import CategoriesCart from '../shared/CategoriesCart/CategoriesCart';
 
 const Home = () => {
+
+    const courses = useLoaderData();
+
     return (
         <div>
             <div className='flex items-center w-[92%] mx-auto my-12'>
@@ -31,24 +36,13 @@ const Home = () => {
                         Grow Your Career Opportunity With Our Courses
                     </h3>
                 </div>
-                <div>
-                    <div className="card w-96 shadow-xl bg-[#E8B8C7]">
-                        <figure><img src="https://placeimg.com/400/225/arch" alt="Shoes" /></figure>
-                        <div className="card-body">
-                            <h2 className="card-title">
-                                Shoes!
-                                <div className="badge badge-secondary">Best Seller</div>
-                            </h2>
-                            <p>If a dog chews shoes whose shoes does he choose?</p>
-                            <div className="card-actions">
-                                <div className="badge badge-outline">Fashion</div>
-                                <div className="badge badge-outline">Products</div>
-                            </div>
-                            <div className='flex justify-end'>
-                                <button className='btn btn-sm bg-[#7cb1a2] border-none hover:bg-[#427c6c]'>Details</button>
-                            </div>
-                        </div>
-                    </div>
+                <div className='grid grid-cols-3 gap-7'>
+                    {
+                        courses.map(course => <CategoriesCart
+                            key={course._id}
+                            course={course}
+                        ></CategoriesCart>)
+                    }
                 </div>
                 <div className='flex justify-end my-4'>
                     <button className='btn btn-sm bg-[#7cb1a2] border-none hover:bg-[#427c6c]'><p className='mr-1'>All Courses</p><FaArrowCircleRight></FaArrowCircleRight></button>

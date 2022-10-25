@@ -12,8 +12,14 @@ export const router = createBrowserRouter([
          children:[
             {
                 path:'/',
-                element:<Home></Home>
-            }
+                element:<Home></Home>,
+                loader: () => fetch('http://localhost:5000/courses')
+            },
+            // {
+            //     path: '/news/:id',
+            //     element: <PrivateRoute><News></News></PrivateRoute>,
+            //     loader: ({params}) => fetch(`https://dragon-news-server-seven.vercel.app/news/${params.id}`)
+            // },
          ]
      }
  ])

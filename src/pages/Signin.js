@@ -1,14 +1,29 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { FaGoogle, FaGithub } from 'react-icons/fa';
+import { AuthContext } from '../contexts/AuthProvider';
+import { GoogleAuthProvider } from 'firebase/auth';
 
 const Signin = () => {
+
+    const { providerLogin } = useContext(AuthContext);
+    const googleProvider = new GoogleAuthProvider();
+
+    const hangleGoogleLogin = () => {
+        providerLogin(googleProvider)
+        .then(result => {
+            const user = result.user;
+            console.log(user);
+        })
+        .catch(e => console.error(e));
+    }
     return (
         <div className='flex my-10'>
             <img className='w-[50%] p-8' src="https://edmy-react.hibootstrap.com/images/register-img.png" alt="" />
             <div className='w-[50%] pr-6'>
                 <div className="px-8 py-6 mx-4 mt-4 text-left bg-white shadow-lg">
                     <h3 className="text-2xl font-bold text-center">Signin</h3>
-                    <form action="">
+                    <form>
                         <div className="mt-4">
                             <div className="mt-4">
                                 <p className='text-center text-red-600'>err</p>
@@ -23,7 +38,7 @@ const Signin = () => {
                             </div>
 
                             <div className="flex">
-                                <button className="w-full px-6 py-2 my-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900">Log In</button>
+                                <button className="w-full my-4 text-white btn btn-sm btn-primary p-1">Log In</button>
                             </div>
                             <div >
                                 <label htmlFor="my-modal-3" className="cursor-pointer text-blue-600">forgot password?</label>
@@ -36,10 +51,12 @@ const Signin = () => {
                             </div>
                         </div>
                     </form>
-                    </div>
+                    <button onClick={hangleGoogleLogin} className='flex items-center btn btn-outline btn-secondary btn-sm btn-wide my-2'><FaGoogle></FaGoogle> <p className='ml-2'>Google Signin</p></button>
+                    <button className='flex items-center btn btn-outline btn-secondary btn-sm btn-wide my-2'><FaGithub></FaGithub> <p className='ml-2'>Github Signin</p></button>
                 </div>
             </div>
-            );
+        </div>
+    );
 };
 
-            export default Signin;
+export default Signin;

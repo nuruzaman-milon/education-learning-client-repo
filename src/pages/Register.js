@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FaGoogle, FaGithub } from 'react-icons/fa';
 
 const Register = () => {
     return (
@@ -37,7 +38,7 @@ const Register = () => {
                                 <button className="w-full px-6 py-2 my-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900">Register</button>
                             </div>
 
-                            <div className="mt-4 text-grey-dark">
+                            <div className="mt-2 text-grey-dark">
                                 Don't have an account?
                                 <Link to='/signin' className="text-blue-600 hover:underline" href="#">
                                     signin
@@ -45,6 +46,8 @@ const Register = () => {
                             </div>
                         </div>
                     </form>
+                    <button className='flex items-center btn btn-outline btn-secondary btn-sm btn-wide my-2'><FaGoogle></FaGoogle> <p className='ml-2'>Google Signin</p></button>
+                    <button className='flex items-center btn btn-outline btn-secondary btn-sm btn-wide my-2'><FaGithub></FaGithub> <p className='ml-2'>Google Signin</p></button>
                     </div>
                 </div>
             </div>

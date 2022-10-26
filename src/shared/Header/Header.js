@@ -11,8 +11,14 @@ const Header = () => {
     setToggle(!toggle);
   }
 
-  const { user } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
   console.log(user);
+
+  const handleLogout = () =>{
+    logout()
+    .then(()=>{})
+    .catch(e=>console.error(e))
+  }
 
   return (
     <div className='dark:bg-black dark:text-white'>
@@ -44,7 +50,7 @@ const Header = () => {
                 <li className='hover:underline decoration-red-600 underline-offset-2'><Link to='/signin'>Signin</Link></li>
                 <li className='hover:underline decoration-red-600 underline-offset-2'><Link to='/register'>Register</Link></li>
               </>
-              : <li className='hover:underline decoration-red-600 underline-offset-2'><Link to='/signin'>Signout</Link></li>
+              : <button onClick={handleLogout} className='btn btn-secondary btn-sm mt-2'>Signout</button>
             }
           </ul>
 
@@ -56,9 +62,9 @@ const Header = () => {
           }</button>
 
 
-          <div className="w-10 rounded-full">
-            <div className="tooltip tooltip-left" data-tip={user?.displayName}>
-              <img className='w-10 rounded-full' src={user?.photoURL} alt='' />
+          <div className="ml-2">
+            <div className={user?.displayName ? 'tooltip tooltip-left' : ''} data-tip={user?.displayName}>
+              <img className='w-9 rounded-full' src={user ? user?.photoURL : 'https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg'} alt='' />
             </div>
           </div>
         </div>

@@ -6,7 +6,7 @@ import { GoogleAuthProvider } from 'firebase/auth';
 
 const Signin = () => {
 
-    const { providerLogin } = useContext(AuthContext);
+    const { providerLogin, signIn } = useContext(AuthContext);
     const googleProvider = new GoogleAuthProvider();
 
     const hangleGoogleLogin = () => {
@@ -17,23 +17,40 @@ const Signin = () => {
         })
         .catch(e => console.error(e));
     }
+
+    const handleSubmit = (e) =>{
+        e.preventDefault();
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        // console.log(name, email, photoURL, password);
+        signIn(email, password)
+        .then(result => {
+            const user = result.user;
+            console.log(user);
+            form.reset();
+        })
+        .catch(e => console.error(e))
+    }
     return (
-        <div className='flex my-10'>
-            <img className='w-[50%] p-8' src="https://edmy-react.hibootstrap.com/images/register-img.png" alt="" />
+        <div className='flex my-10 items-center'>
+            <div>
+                <img className='w-[100%] p-8' src="https://edmy-react.hibootstrap.com/images/register-img.png" alt="" />
+            </div>
             <div className='w-[50%] pr-6'>
                 <div className="px-8 py-6 mx-4 mt-4 text-left bg-white shadow-lg">
                     <h3 className="text-2xl font-bold text-center">Signin</h3>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <div className="mt-4">
                             <div className="mt-4">
                                 <p className='text-center text-red-600'>err</p>
                                 <label className="block" htmlFor="email">Email</label>
-                                <input type="email" placeholder="Email"
+                                <input type="email" name='email' placeholder="Email"
                                     className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600" />
                             </div>
                             <div className="mt-4">
                                 <label name='password' className="block">Password</label>
-                                <input type="password" placeholder="Password"
+                                <input type="password" name='password' placeholder="Password"
                                     className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600" />
                             </div>
 

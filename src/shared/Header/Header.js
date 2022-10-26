@@ -1,14 +1,18 @@
-import React, { createContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaStarAndCrescent, FaSun } from 'react-icons/fa';
+import { AuthContext } from '../../contexts/AuthProvider';
 
-export const toggleContext = createContext();
+
 
 const Header = () => {
   const [toggle, setToggle] = useState(false)
-  const handleThemeToggle = () =>{
-        setToggle(!toggle);
+  const handleThemeToggle = () => {
+    setToggle(!toggle);
   }
+
+  const { user } = useContext(AuthContext);
+  console.log(user);
 
   return (
     <div className='dark:bg-black dark:text-white'>
@@ -35,21 +39,28 @@ const Header = () => {
             <li className='hover:underline decoration-red-600 underline-offset-2'><Link to='/courses'>Courses</Link></li>
             <li className='hover:underline decoration-red-600 underline-offset-2'><Link to='/faq'>FAQ</Link></li>
             <li className='hover:underline decoration-red-600 underline-offset-2'><Link to='/blog'>Blog</Link></li>
-            <li className='hover:underline decoration-red-600 underline-offset-2'><Link to='/signin'>Signin</Link></li>
-            <li className='hover:underline decoration-red-600 underline-offset-2'><Link to='/register'>Register</Link></li>
+            {!user ?
+              <>
+                <li className='hover:underline decoration-red-600 underline-offset-2'><Link to='/signin'>Signin</Link></li>
+                <li className='hover:underline decoration-red-600 underline-offset-2'><Link to='/register'>Register</Link></li>
+              </>
+              : <li className='hover:underline decoration-red-600 underline-offset-2'><Link to='/signin'>Signout</Link></li>
+            }
           </ul>
 
         </div>
-        <div className="navbar-end">
-          <button onClick={()=>handleThemeToggle(true)}>{
-            toggle? <FaStarAndCrescent></FaStarAndCrescent> : <FaSun></FaSun>
-            }</button>
 
-          <label tabIndex={0} className="btn btn-ghost btn-circle avatar ml-2">
-            <div className="w-10 rounded-full">
-              <img src="https://placeimg.com/80/80/people" />
+        <div className="navbar-end">
+          <button onClick={() => handleThemeToggle(true)}>{
+            toggle ? <FaStarAndCrescent></FaStarAndCrescent> : <FaSun></FaSun>
+          }</button>
+
+
+          <div className="w-10 rounded-full">
+            <div className="tooltip tooltip-left" data-tip={user?.displayName}>
+              <img className='w-10 rounded-full' src={user?.photoURL} alt='' />
             </div>
-          </label>
+          </div>
         </div>
       </div>
     </div>

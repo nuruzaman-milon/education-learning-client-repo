@@ -6,7 +6,7 @@ import { AuthContext } from '../contexts/AuthProvider';
 
 const Register = () => {
 
-    const { providerLogin, createUser } = useContext(AuthContext);
+    const { providerLogin, createUser, updateUserProfile } = useContext(AuthContext);
     const googleProvider = new GoogleAuthProvider();
 
     //google signin
@@ -33,11 +33,20 @@ const Register = () => {
             const user = result.user;
             console.log(user);
             form.reset();
+            handleUpdateProfile(name, photoURL);
         })
         .catch(e => console.error(e))
     }
 
-   
+   const handleUpdateProfile = (name, photoURL) => {
+    const profile = {
+        displayName : name,
+        photoURL : photoURL
+    }
+    updateUserProfile(profile)
+    .then(()=>{})
+    .catch(e=>console.error(e))
+   }
 
 
     return (

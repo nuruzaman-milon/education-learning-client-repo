@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React, { createContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaStarAndCrescent, FaSun } from 'react-icons/fa';
+
+export const toggleContext = createContext();
 
 const Header = () => {
   const [toggle, setToggle] = useState(false)
   const handleThemeToggle = () =>{
         setToggle(!toggle);
   }
-console.log(toggle);
-  // console.log(props);
+
   return (
     <div className='dark:bg-black dark:text-white'>
       <div className="navbar w-[92%] mx-auto">
@@ -30,25 +31,16 @@ console.log(toggle);
         </div>
         <div className="navbar-center">
           <ul className="hidden lg:flex menu menu-horizontal p-0">
-            <li className='hover:underline decoration-red-600 underline-offset-2'><Link to=''>Home</Link></li>
-            <li className='hover:underline decoration-red-600 underline-offset-2'><Link to=''>Courses</Link></li>
-            <li className='hover:underline decoration-red-600 underline-offset-2'><Link to=''>FAQ</Link></li>
-            <li className='hover:underline decoration-red-600 underline-offset-2'><Link to=''>Blog</Link></li>
-            <li className='hover:underline decoration-red-600 underline-offset-2'><Link to=''>Signin</Link></li>
-            <li className='hover:underline decoration-red-600 underline-offset-2'><Link to=''>Register</Link></li>
+            <li className='hover:underline decoration-red-600 underline-offset-2'><Link to='/'>Home</Link></li>
+            <li className='hover:underline decoration-red-600 underline-offset-2'><Link to='/courses'>Courses</Link></li>
+            <li className='hover:underline decoration-red-600 underline-offset-2'><Link to='/faq'>FAQ</Link></li>
+            <li className='hover:underline decoration-red-600 underline-offset-2'><Link to='/blog'>Blog</Link></li>
+            <li className='hover:underline decoration-red-600 underline-offset-2'><Link to='/signin'>Signin</Link></li>
+            <li className='hover:underline decoration-red-600 underline-offset-2'><Link to='/register'>Register</Link></li>
           </ul>
 
         </div>
         <div className="navbar-end">
-
-          {/* <button>
-            <FaStarAndCrescent></FaStarAndCrescent>
-          </button>
-
-          <button>
-            <FaSun></FaSun>
-          </button> */}
-
           <button onClick={()=>handleThemeToggle(true)}>{
             toggle? <FaStarAndCrescent></FaStarAndCrescent> : <FaSun></FaSun>
             }</button>

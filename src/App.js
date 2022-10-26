@@ -1,8 +1,8 @@
-import { useState } from "react";
+// import { useState } from "react";
+// import { useContext, useState } from "react";
 import { RouterProvider } from "react-router-dom";
-// import Header from "./shared/Header/Header";
 import { router } from "./Routes/Routes";
-import Header from "./shared/Header/Header";
+// import Header from "./shared/Header/Header";
 
 function App() {
 
@@ -10,11 +10,16 @@ function App() {
   // const handleThemeToggle = () =>{
   //       setToggle(!toggle);
   // }
-  // <Header toogle={handleThemeToggle}></Header>
+  // <Header handleThemeToggle={handleThemeToggle} toggle={toggle}></Header>
+  // const context = useContext(toggleContext);
+  //className={`App font-roboto ${context ? 'dark' : ''}`}
+  // <Header handleThemeToggle={handleThemeToggle} toggle={toggle}></Header>
   return (
-    <div className="App font-roboto dark {toggle}">
-      <RouterProvider router={router}></RouterProvider>
-    </div>
+    // <toggleProvider>
+      <div className="font-roboto">
+        <RouterProvider router={router}></RouterProvider>
+      </div>
+    // </toggleProvider>
   );
 }
 

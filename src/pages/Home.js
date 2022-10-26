@@ -7,6 +7,9 @@ import CategoriesCart from '../shared/CategoriesCart/CategoriesCart';
 const Home = () => {
 
     const courses = useLoaderData();
+    // console.log(courses);
+    const selectedCourses = courses.filter(course => course.bestSeller === true)
+    // console.log(selectedCourses);
 
     return (
         <div>
@@ -36,9 +39,9 @@ const Home = () => {
                         Grow Your Career Opportunity With Our Courses
                     </h3>
                 </div>
-                <div className='grid grid-cols-3 gap-7'>
+                <div className='grid grid-cols-4 gap-7'>
                     {
-                        courses.map(course => <CategoriesCart
+                        selectedCourses.map(course => <CategoriesCart
                             key={course._id}
                             course={course}
                         ></CategoriesCart>)

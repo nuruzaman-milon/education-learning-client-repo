@@ -2,6 +2,8 @@ import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import Main from '../layouts/Main';
 import Home from '../pages/Home';
+import Register from '../pages/Register';
+import Signin from '../pages/Signin';
 
 
 
@@ -15,11 +17,14 @@ export const router = createBrowserRouter([
                 element:<Home></Home>,
                 loader: () => fetch('http://localhost:5000/courses')
             },
-            // {
-            //     path: '/news/:id',
-            //     element: <PrivateRoute><News></News></PrivateRoute>,
-            //     loader: ({params}) => fetch(`https://dragon-news-server-seven.vercel.app/news/${params.id}`)
-            // },
+            {
+                path:'/signin',
+                element:<Signin></Signin>
+            },
+            {
+                path:'/register',
+                element:<Register></Register>
+            }
          ]
      }
  ])

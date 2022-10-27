@@ -1,18 +1,18 @@
 import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import { FaFilePdf } from 'react-icons/fa';
 import Pdf from "react-to-pdf";
 
 const SingleCourseDetails = () => {
     const singleDetailsData = useLoaderData();
-    // console.log(singleDetailsData);
-    const { bestSeller, courseFor, details, img, instructor, price, ratings, requirements, title } = singleDetailsData;
+    console.log(singleDetailsData);
+    const { _id, bestSeller, courseFor, details, img, instructor, price, ratings, requirements, title } = singleDetailsData;
     const splitCourseFor = courseFor.split(", ");
     const splitRequirements = requirements.split(", ")
     const ref = React.createRef();
     return (
         <div>
-            <div className='bg-rose-300'>
+            <div className='bg-rose-200 mt-2'>
                 <div className='lg:flex items-center w-[92%] mx-auto py-7 lg:py-12 justify-between'>
                     <p className='font-bold text-3xl'>{title}</p>
                     <Pdf targetRef={ref} filename="code-example.pdf">
@@ -30,12 +30,12 @@ const SingleCourseDetails = () => {
                         <div className="badge badge-secondary">Ratings: {ratings}</div>
                     </div>
                     <h2 className='text-lg'><strong>Instructor:</strong> {instructor}</h2>
-                    <h2><strong>Course Fee:</strong> {price}</h2>
+                    <h2><strong>Course Fee:</strong> ৳{price}</h2>
                     <p><strong>Who this course is for:</strong> {splitCourseFor.map(data => <li>{data}</li>)}</p>
                     <p><strong>Requirements:</strong> {splitRequirements.map(data => <li>{data}</li>)}</p>
                     <p><strong>Details: <br /></strong> {details}</p>
                     <div className="card-actions justify-center lg:justify-end">
-                        <button className="btn btn-primary">Get premium access</button>
+                        <Link to={`/checkout/${_id}`}><button className="btn btn-primary">Get premium access</button></Link>
                     </div>
                 </div>
             </div>

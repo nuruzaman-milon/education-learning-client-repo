@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaGoogle, FaGithub } from 'react-icons/fa';
 import { AuthContext } from '../contexts/AuthProvider';
 import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
@@ -11,12 +11,15 @@ const Signin = () => {
     const googleProvider = new GoogleAuthProvider();
     const githubProvider = new GithubAuthProvider();
     const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || '/';
 
     const hangleGoogleLogin = () => {
         providerLogin(googleProvider)
             .then(result => {
                 const user = result.user;
-                navigate("/");
+                navigate(from, {replace: true});
             })
             .catch(error => {
                 const errorCode = error.code;
@@ -28,7 +31,7 @@ const Signin = () => {
         githubProviderLogin(githubProvider)
             .then(result => {
                 const user = result.user;
-                navigate("/");
+                navigate(from, {replace: true});
             })
             .catch(error => {
                 const errorCode = error.code;
@@ -48,7 +51,7 @@ const Signin = () => {
                 const user = result.user;
                 console.log(user);
                 form.reset();
-                navigate("/");
+                navigate(from, {replace: true});
             })
             .catch(error => {
                 const errorCode = error.code;

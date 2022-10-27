@@ -7,14 +7,17 @@ const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     //google sign in
     const providerLogin = (provider) =>{
+        setLoading(true);
         return signInWithPopup(auth, provider);
     }
 
     //github sign in
     const githubProviderLogin = (githubProvider) =>{
+        setLoading(true);
         return signInWithPopup(auth, githubProvider);
     }
 
@@ -23,10 +26,7 @@ const AuthProvider = ({ children }) => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             console.log('inside auth state change', currentUser);
             setUser(currentUser)
-            // if(currentUser === null || currentUser.emailVerified){
-            //     setUser(currentUser);
-            // }
-            // setLoading(false);
+            setLoading(false);
         });
 
         return () => {
@@ -37,6 +37,7 @@ const AuthProvider = ({ children }) => {
 
     //logout
     const logout = () =>{
+        setLoading(true);
         return signOut(auth);
     }
 
@@ -47,15 +48,17 @@ const AuthProvider = ({ children }) => {
 
     //manual login user
     const signIn = (email, password) =>{
+        setLoading(true);
         return signInWithEmailAndPassword(auth, email, password);
     }
 
     //update user profile
     const updateUserProfile = (profile) => {
+        setLoading(true);
         return updateProfile(auth.currentUser, profile);
     }
     
-    const authInfo = { user, providerLogin, githubProviderLogin, logout, createUser, signIn, updateUserProfile }
+    const authInfo = { user, loading, providerLogin, githubProviderLogin, logout, createUser, signIn, updateUserProfile }
     return (
         <div>
             <AuthContext.Provider value={authInfo}>

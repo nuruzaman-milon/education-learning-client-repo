@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaGoogle, FaGithub } from 'react-icons/fa';
 import { AuthContext } from '../contexts/AuthProvider';
 import { GoogleAuthProvider } from 'firebase/auth';
@@ -9,12 +9,13 @@ const Signin = () => {
     const [error, setError] = useState('');
     const { providerLogin, signIn } = useContext(AuthContext);
     const googleProvider = new GoogleAuthProvider();
+    const navigate = useNavigate();
 
     const hangleGoogleLogin = () => {
         providerLogin(googleProvider)
             .then(result => {
                 const user = result.user;
-                // console.log(user);
+                navigate("/");
             })
             .catch(error => {
                 const errorCode = error.code;
@@ -34,6 +35,7 @@ const Signin = () => {
                 const user = result.user;
                 console.log(user);
                 form.reset();
+                navigate("/");
             })
             .catch(error => {
                 const errorCode = error.code;

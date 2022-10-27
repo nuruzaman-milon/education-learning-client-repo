@@ -57,14 +57,14 @@ const Header = () => {
         </div>
 
         <div className="navbar-end">
-          <button onClick={() => handleThemeToggle(true)}>{
+          <button className='text-2xl' onClick={() => handleThemeToggle(true)}>{
             toggle ? <FaStarAndCrescent></FaStarAndCrescent> : <FaSun></FaSun>
           }</button>
 
 
           <div className="ml-2">
             <div className={user?.displayName ? 'tooltip tooltip-left' : ''} data-tip={user?.displayName}>
-              <img className='w-9 rounded-full' src={user ? user?.photoURL : 'https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg'} alt='' />
+              <img className='w-9 rounded-full' src={user?.photoURL ? user?.photoURL : ''} alt='' />
             </div>
           </div>
         </div>

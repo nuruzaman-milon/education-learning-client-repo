@@ -22,8 +22,8 @@ const Courses = () => {
             });
     }
     return (
-        <div className='flex w-[92%] mx-auto my-10'>
-            <div className='bg-rose-200 w-[20%] rounded-xl p-2'>
+        <div className='lg:flex w-[92%] mx-auto my-10'>
+            <div className='bg-rose-200 lg:w-[20%] rounded-xl p-4 lg:p-2 mb-8 lg:mb-0'>
                 <button onClick={hangleGoogleLogin} className='flex items-center btn btn-secondary btn-outline btn-sm my-4 mx-auto w-full'><FaGoogle></FaGoogle> <p className='ml-2'>Google Signin</p></button>
                 <button className='btn btn-secondary btn-sm my-2 mx-auto w-full'><Link to='/course/0282e0e58a5c404fbd15261f11c2ab6a'>Python</Link></button>
                 <button className='btn btn-secondary btn-sm my-2 mx-auto w-full'><Link to='/course/0282e0e58a5c404fbd15261f11c2ab6b'>React</Link></button>
@@ -32,7 +32,7 @@ const Courses = () => {
                 <button className='btn btn-secondary btn-sm my-2 mx-auto w-full'><Link to='/course/11468ed61aee84de492a8b04158a22f9'>Api</Link></button>
                 <button className='btn btn-secondary btn-sm my-2 mx-auto w-full'><Link to='/course/11468ed61aee84de492a8b04158a22f0'>MongoDB</Link></button>
             </div>
-            <div className='w-[80%] grid grid-cols-3 gap-8 ml-8'>
+            <div className='lg:w-[80%] grid lg:grid-cols-3 gap-8 lg:ml-8'>
                 {
                         coursesData.map(course => <AllCoursesCart
                             key={course._id}

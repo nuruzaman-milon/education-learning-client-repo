@@ -13,19 +13,19 @@ const SingleCourseDetails = () => {
     return (
         <div>
             <div className='bg-rose-300'>
-                <div className='flex items-center w-[92%] mx-auto py-12 justify-between'>
+                <div className='lg:flex items-center w-[92%] mx-auto py-7 lg:py-12 justify-between'>
                     <p className='font-bold text-3xl'>{title}</p>
                     <Pdf targetRef={ref} filename="code-example.pdf">
-                        {({ toPdf }) => <button className='flex items-center btn btn-secondary' onClick={toPdf}><FaFilePdf></FaFilePdf><p className='ml-2'>Download pdf</p></button>}
+                        {({ toPdf }) => <button className='flex lg:items-center mt-5 lg:mt-0 btn btn-secondary' onClick={toPdf}><FaFilePdf></FaFilePdf><p className='ml-2'>Download pdf</p></button>}
                     </Pdf>
                     {/* <button className='flex items-center btn btn-secondary'><FaFilePdf></FaFilePdf><p className='ml-2'>Download pdf</p></button> */}
                 </div>
             </div>
 
-            <div  className="card lg:card-side bg-base-100 shadow-xl mt-6 w-[92%] mx-auto">
-                <img className='w-[40%] h-[100%] p-5' src={img} alt="Album" />
+            <div className="card lg:card-side bg-base-100 shadow-xl mt-6 lg:w-[92%] mx-auto">
+                <img className='lg:w-[40%] h-[100%] p-5' src={img} alt="Album" />
                 <div ref={ref} className="card-body">
-                    <div className="card-actions justify-end">
+                    <div className="card-actions justify-center lg:justify-end">
                         {bestSeller && <div className="badge badge-secondary py-1">Best Seller</div>} <br />
                         <div className="badge badge-secondary">Ratings: {ratings}</div>
                     </div>
@@ -34,7 +34,7 @@ const SingleCourseDetails = () => {
                     <p><strong>Who this course is for:</strong> {splitCourseFor.map(data => <li>{data}</li>)}</p>
                     <p><strong>Requirements:</strong> {splitRequirements.map(data => <li>{data}</li>)}</p>
                     <p><strong>Details: <br /></strong> {details}</p>
-                    <div className="card-actions justify-end">
+                    <div className="card-actions justify-center lg:justify-end">
                         <button className="btn btn-primary">Get premium access</button>
                     </div>
                 </div>

@@ -16,7 +16,7 @@ const Register = () => {
         providerLogin(googleProvider)
             .then(result => {
                 const user = result.user;
-                // console.log(user);
+                navigate("/");
             })
             .catch(error => {
                 const errorCode = error.code;
@@ -74,12 +74,12 @@ const Register = () => {
 
     return (
         <div>
-            <div className='flex my-10 items-center'>
+            <div className='lg:flex my-6 lg:my-10 items-center w-[92%] mx-auto'>
                 <div>
-                    <img className='w-[100%] p-8' src="https://edmy-react.hibootstrap.com/images/register-img.png" alt="" />
+                    <img className='w-[100%]' src="https://edmy-react.hibootstrap.com/images/register-img.png" alt="" />
                 </div>
-                <div className='w-[50%] pr-6'>
-                    <div className="px-8 py-6 mx-4 mt-4 text-left bg-white shadow-lg">
+                <div className='lg:w-[50%]'>
+                    <div className="px-4 lg:px-8 py-6 lg:mx-4 mt-4 text-left bg-rose-200 rounded-xl shadow-lg">
                         <h3 className="text-2xl font-bold text-center">Register</h3>
                         <form onSubmit={handleSubmit}>
                             <div className="mt-4">
@@ -109,16 +109,16 @@ const Register = () => {
                                     <button className="w-full px-6 py-2 my-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900">Register</button>
                                 </div>
 
-                                <div className="mt-2 text-grey-dark">
+                                <div className="mt-1 text-grey-dark mb-4">
                                     Don't have an account?
                                     <Link to='/signin' className="text-blue-600 hover:underline" href="#">
-                                        signin
+                                        Signin
                                     </Link>
                                 </div>
                             </div>
                         </form>
-                        <button onClick={hangleGoogleLogin} className='flex items-center btn btn-outline btn-secondary btn-sm btn-wide my-2'><FaGoogle></FaGoogle> <p className='ml-2'>Google Signin</p></button>
-                        <button onClick={handleGithubLogin} className='flex items-center btn btn-outline btn-secondary btn-sm btn-wide my-2'><FaGithub></FaGithub> <p className='ml-2'>Github Signin</p></button>
+                        <button onClick={hangleGoogleLogin} className='flex items-center btn btn-outline btn-secondary btn-sm w-full lg:btn-wide  my-2'><FaGoogle></FaGoogle> <p className='ml-2'>Google Signin</p></button>
+                        <button onClick={handleGithubLogin} className='flex items-center btn btn-outline btn-secondary btn-sm w-full lg:btn-wide my-2'><FaGithub></FaGithub> <p className='ml-2'>Github Signin</p></button>
                     </div>
                 </div>
             </div>

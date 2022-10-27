@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typewriter } from 'react-simple-typewriter';
 import { FaArrowCircleRight } from 'react-icons/fa';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import CategoriesCart from '../shared/CategoriesCart/CategoriesCart';
 
 const Home = () => {
@@ -48,7 +48,7 @@ const Home = () => {
                     }
                 </div>
                 <div className='flex justify-end my-4'>
-                    <button className='btn btn-sm bg-[#7cb1a2] border-none hover:bg-[#427c6c]'><p className='mr-1'>All Courses</p><FaArrowCircleRight></FaArrowCircleRight></button>
+                    <Link to='/courses'><button className='btn btn-sm bg-[#7cb1a2] border-none hover:bg-[#427c6c]'><p className='mr-1'>All Courses</p><FaArrowCircleRight></FaArrowCircleRight></button></Link>
                 </div>
             </div>
 
@@ -58,28 +58,28 @@ const Home = () => {
                     <h1 className='font-extrabold text-3xl'>Why You Should Choose Edemy</h1>
                 </div>
                 <div className='flex'>
-                    <div className="card card-compact bg-base-100 shadow-xl mr-2">
+                    <div className="card card-compact bg-base-100 shadow-xl mr-2 hover:bg-rose-200 pt-2">
                         <img className='w-[20%] ml-4' src="https://phero-web.nyc3.cdn.digitaloceanspaces.com/website-prod-images/public/files/1607429725146.png" alt="Shoes" />
                         <div className="card-body">
                             <h2 className="card-title">Unlimited Support: </h2>
                             <p>We will touch with you all the time. If any help needed you can contact with us through email, phone and live session.</p>
                         </div>
                     </div>
-                    <div className="card card-compact bg-base-100 shadow-xl mr-2">
+                    <div className="card card-compact bg-base-100 shadow-xl mr-2 hover:bg-rose-200 pt-2">
                         <img className='w-[20%] ml-4' src="https://phero-web.nyc3.cdn.digitaloceanspaces.com/website-prod-images/public/files/1623043713790.png" alt="Shoes" />
                         <div className="card-body">
                             <h2 className="card-title">Offline Recordings: </h2>
                             <p>We will provide offline video when needed. This video will help to understand the topics more better and clear.</p>
                         </div>
                     </div>
-                    <div className="card card-compact bg-base-100 shadow-xl mr-2">
+                    <div className="card card-compact bg-base-100 shadow-xl mr-2 hover:bg-rose-200 pt-2">
                         <img className='w-[20%] ml-4' src="https://phero-web.nyc3.cdn.digitaloceanspaces.com/website-prod-images/public/files/1623043584898.png" alt="Shoes" />
                         <div className="card-body">
                             <h2 className="card-title">Live Session: </h2>
                             <p>When needed we provide you the opportunity of live classes through google meet or zoom session weekly basis.</p>
                         </div>
                     </div>
-                    <div className="card card-compact bg-base-100 shadow-xl">
+                    <div className="card card-compact bg-base-100 shadow-xl hover:bg-rose-200 pt-2">
                         <img className='w-[20%] ml-4' src="https://phero-web.nyc3.cdn.digitaloceanspaces.com/website-prod-images/public/files/1623043653417.png" alt="Shoes" />
                         <div className="card-body">
                             <h2 className="card-title">Advance Course: </h2>

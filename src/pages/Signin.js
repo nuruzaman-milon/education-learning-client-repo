@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaGoogle, FaGithub } from 'react-icons/fa';
 import { AuthContext } from '../contexts/AuthProvider';
@@ -6,31 +6,40 @@ import { GoogleAuthProvider } from 'firebase/auth';
 
 const Signin = () => {
 
+    const [error, setError] = useState('');
     const { providerLogin, signIn } = useContext(AuthContext);
     const googleProvider = new GoogleAuthProvider();
 
     const hangleGoogleLogin = () => {
         providerLogin(googleProvider)
-        .then(result => {
-            const user = result.user;
-            // console.log(user);
-        })
-        .catch(e => console.error(e));
+            .then(result => {
+                const user = result.user;
+                // console.log(user);
+            })
+            .catch(error => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                setError(errorMessage);
+            });
     }
 
-    const handleSubmit = (e) =>{
+    const handleSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
         // console.log(name, email, photoURL, password);
         signIn(email, password)
-        .then(result => {
-            const user = result.user;
-            console.log(user);
-            form.reset();
-        })
-        .catch(e => console.error(e))
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                form.reset();
+            })
+            .catch(error => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                setError(errorMessage);
+            })
     }
     return (
         <div className='flex my-10 items-center'>
@@ -43,14 +52,14 @@ const Signin = () => {
                     <form onSubmit={handleSubmit}>
                         <div className="mt-4">
                             <div className="mt-4">
-                                <p className='text-center text-red-600'>err</p>
+                                <p className='text-center text-red-600'>{error}</p>
                                 <label className="block" htmlFor="email">Email</label>
-                                <input type="email" name='email' placeholder="Email"
+                                <input required type="email" name='email' placeholder="Email"
                                     className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600" />
                             </div>
                             <div className="mt-4">
                                 <label name='password' className="block">Password</label>
-                                <input type="password" name='password' placeholder="Password"
+                                <input required type="password" name='password' placeholder="Password"
                                     className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600" />
                             </div>
 

@@ -1,10 +1,11 @@
 import React from 'react';
 import { FaArrowCircleRight } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 
 const CategoriesCart = ({course}) => {
 
-    const {title, ratings, price, img } = course;
+    const {_id, title, ratings, price, img } = course;
     // console.log(title);
     return (
         <div>
@@ -21,7 +22,7 @@ const CategoriesCart = ({course}) => {
                         <div className="badge badge-outline">Ratings: {ratings}</div>
                     </div>
                     <div className='flex justify-end absolute right-2 bottom-2'>
-                        <button className='btn btn-sm bg-[#7cb1a2] border-none hover:bg-[#427c6c]'><p className='mr-1'>Details</p> <FaArrowCircleRight></FaArrowCircleRight></button>
+                        <Link to={`/course/${_id}`}><button className='btn btn-sm bg-[#7cb1a2] border-none hover:bg-[#427c6c]'><p className='mr-1'>Details</p> <FaArrowCircleRight></FaArrowCircleRight></button></Link>
                     </div>
                 </div>
             </div>

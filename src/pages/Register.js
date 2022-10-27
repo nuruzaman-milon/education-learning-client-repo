@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaGoogle, FaGithub } from 'react-icons/fa';
 import { GoogleAuthProvider } from 'firebase/auth';
@@ -6,6 +6,7 @@ import { AuthContext } from '../contexts/AuthProvider';
 
 const Register = () => {
 
+    const [error, setError] = useState('');
     const { providerLogin, createUser, updateUserProfile } = useContext(AuthContext);
     const googleProvider = new GoogleAuthProvider();
 
@@ -16,11 +17,15 @@ const Register = () => {
                 const user = result.user;
                 // console.log(user);
             })
-            .catch(e => console.error(e));
+            .catch(error => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                setError(errorMessage);
+            });
     }
 
- //create manual user
-    const handleSubmit = (e) =>{
+    //create manual user
+    const handleSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
         const name = form.name.value;
@@ -29,24 +34,28 @@ const Register = () => {
         const password = form.password.value;
         // console.log(name, email, photoURL, password);
         createUser(email, password)
-        .then(result => {
-            const user = result.user;
-            console.log(user);
-            form.reset();
-            handleUpdateProfile(name, photoURL);
-        })
-        .catch(e => console.error(e))
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                form.reset();
+                handleUpdateProfile(name, photoURL);
+            })
+            .catch(error => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                setError(errorMessage);
+            })
     }
 
-   const handleUpdateProfile = (name, photoURL) => {
-    const profile = {
-        displayName : name,
-        photoURL : photoURL
+    const handleUpdateProfile = (name, photoURL) => {
+        const profile = {
+            displayName: name,
+            photoURL: photoURL
+        }
+        updateUserProfile(profile)
+            .then(() => { })
+            .catch(e => setError(e))
     }
-    updateUserProfile(profile)
-    .then(()=>{})
-    .catch(e=>console.error(e))
-   }
 
 
     return (
@@ -61,24 +70,24 @@ const Register = () => {
                         <form onSubmit={handleSubmit}>
                             <div className="mt-4">
                                 <div className="mt-4">
-                                    <p className='text-center text-red-600'>err</p>
+                                    <p className='text-center text-red-600'>{error}</p>
                                     <label className="block" htmlFor="email">Full Name</label>
-                                    <input type="text" name='name' placeholder="Name"
+                                    <input required type="text" name='name' placeholder="Name"
                                         className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600" />
                                 </div>
                                 <div className="mt-4">
                                     <label className="block" htmlFor="email">Email</label>
-                                    <input type="email" name='email' placeholder="Email"
+                                    <input required type="email" name='email' placeholder="Email"
                                         className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600" />
                                 </div>
                                 <div className="mt-4">
                                     <label name='password' className="block">Password</label>
-                                    <input type="password" name='password' placeholder="Password"
+                                    <input required type="password" name='password' placeholder="Password"
                                         className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600" />
                                 </div>
                                 <div className="mt-4">
                                     <label name='url' className="block">Photo Url</label>
-                                    <input type="text" name='url' placeholder="url"
+                                    <input required type="text" name='url' placeholder="url"
                                         className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600" />
                                 </div>
 

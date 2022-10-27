@@ -11,13 +11,13 @@ const Checkout = () => {
 
 
     return (
-        <div className='w-[92%] mx-auto'>
+        <div className='w-[92%] mx-auto my-6'>
             
             <div className="card bg-rose-100 shadow-xl py-6 px-6">
             <h1 className='text-center text-3xl font-bold mb-4'>{title}</h1>
-                <div className='flex justify-between items-center'>
-                    <img className='w-[40%] rounded-xl' src={img} alt="Movie" />
-                    <div>
+                <div className='lg:flex justify-between items-center'>
+                    <img className='lg:w-[40%] rounded-xl' src={img} alt="Movie" />
+                    <div className='mt-6 lg:mt-0'>
                         <h2 className="card-title mb-2">{title}</h2>
                         <p className='mb-2'><strong>Total Price:</strong> ৳{price}</p>
                         <p className='mb-2'><strong>Deliver To:</strong> {user?.displayName}</p>

@@ -22,7 +22,7 @@ export const router = createBrowserRouter([
             {
                 path:'/',
                 element:<Home></Home>,
-                loader: () => fetch('http://localhost:5000/courses')
+                loader: () => fetch('https://learning-app-server-taupe.vercel.app/courses')
             },
             {
                 path:'/signin',
@@ -35,17 +35,17 @@ export const router = createBrowserRouter([
             {
                 path:'/courses',
                 element:<Courses></Courses>,
-                loader: () => fetch('http://localhost:5000/courses')
+                loader: () => fetch('https://learning-app-server-taupe.vercel.app/courses')
             },
             {
                 path:'/course/:id',
                 element:<SingleCourseDetails></SingleCourseDetails>,
-                loader: ({params}) => fetch(`http://localhost:5000/course/${params.id}`)
+                loader: ({params}) => fetch(`https://learning-app-server-taupe.vercel.app/course/${params.id}`)
             },
             {
                 path:'/checkout/:id',
                 element:<PrivateRoute><Checkout></Checkout></PrivateRoute>,
-                loader: ({params}) => fetch(`http://localhost:5000/course/${params.id}`)
+                loader: ({params}) => fetch(`https://learning-app-server-taupe.vercel.app/course/${params.id}`)
             },
             {
                 path:'/blog',

@@ -1,15 +1,16 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaGoogle, FaGithub } from 'react-icons/fa';
-import { GoogleAuthProvider } from 'firebase/auth';
+import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import { AuthContext } from '../contexts/AuthProvider';
 
 const Register = () => {
 
     const [error, setError] = useState('');
-    const { providerLogin, createUser, updateUserProfile } = useContext(AuthContext);
+    const { providerLogin, createUser, updateUserProfile, githubProviderLogin } = useContext(AuthContext);
     const googleProvider = new GoogleAuthProvider();
-
+    const githubProvider = new GithubAuthProvider();
+    const navigate = useNavigate();
     //google signin
     const hangleGoogleLogin = () => {
         providerLogin(googleProvider)
@@ -21,6 +22,19 @@ const Register = () => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 setError(errorMessage);
+            });
+    }
+
+    const handleGithubLogin = () => {
+        githubProviderLogin(githubProvider)
+            .then(result => {
+                const user = result.user;
+                navigate("/");
+            })
+            .catch(error => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                // setError(errorMessage);
             });
     }
 
@@ -104,7 +118,7 @@ const Register = () => {
                             </div>
                         </form>
                         <button onClick={hangleGoogleLogin} className='flex items-center btn btn-outline btn-secondary btn-sm btn-wide my-2'><FaGoogle></FaGoogle> <p className='ml-2'>Google Signin</p></button>
-                        <button className='flex items-center btn btn-outline btn-secondary btn-sm btn-wide my-2'><FaGithub></FaGithub> <p className='ml-2'>Github Signin</p></button>
+                        <button onClick={handleGithubLogin} className='flex items-center btn btn-outline btn-secondary btn-sm btn-wide my-2'><FaGithub></FaGithub> <p className='ml-2'>Github Signin</p></button>
                     </div>
                 </div>
             </div>

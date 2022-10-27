@@ -2,17 +2,30 @@ import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaGoogle, FaGithub } from 'react-icons/fa';
 import { AuthContext } from '../contexts/AuthProvider';
-import { GoogleAuthProvider } from 'firebase/auth';
+import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 
 const Signin = () => {
 
     const [error, setError] = useState('');
-    const { providerLogin, signIn } = useContext(AuthContext);
+    const { providerLogin, githubProviderLogin, signIn } = useContext(AuthContext);
     const googleProvider = new GoogleAuthProvider();
+    const githubProvider = new GithubAuthProvider();
     const navigate = useNavigate();
 
     const hangleGoogleLogin = () => {
         providerLogin(googleProvider)
+            .then(result => {
+                const user = result.user;
+                navigate("/");
+            })
+            .catch(error => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                setError(errorMessage);
+            });
+    }
+    const handleGithubLogin = () => {
+        githubProviderLogin(githubProvider)
             .then(result => {
                 const user = result.user;
                 navigate("/");
@@ -80,7 +93,7 @@ const Signin = () => {
                         </div>
                     </form>
                     <button onClick={hangleGoogleLogin} className='flex items-center btn btn-outline btn-secondary btn-sm btn-wide my-2'><FaGoogle></FaGoogle> <p className='ml-2'>Google Signin</p></button>
-                    <button className='flex items-center btn btn-outline btn-secondary btn-sm btn-wide my-2'><FaGithub></FaGithub> <p className='ml-2'>Github Signin</p></button>
+                    <button onClick={handleGithubLogin} className='flex items-center btn btn-outline btn-secondary btn-sm btn-wide my-2'><FaGithub></FaGithub> <p className='ml-2'>Github Signin</p></button>
                 </div>
             </div>
         </div>
